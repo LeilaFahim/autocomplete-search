@@ -1,0 +1,30 @@
+:root {
+  --placeholder-color: rgba(139, 118, 218, 1);
+  --background-color: rgba(30, 28, 52, 1);
+  --white-color: #ffffff;
+  --font-color: rgba(30, 28, 52, 0.9);
+  --font-color-light: rgba(30, 28, 52, 0.8);
+  --border-color: rgba(30, 28, 52, 0.3);
+  --border-radius: 8px;
+  --scroll-color: rgba(100, 44, 157, 1);
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: sans-serif;
+}
+
+input,
+button,
+ul,
+li {
+  all: unset;
+}
+
+::placeholder {
+  color: var(--placeholder-color);
+}
+
+.hide {
+  display: none !important;
+}

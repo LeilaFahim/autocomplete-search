@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Autocomplete search-box</title>
+    <meta name="description" content="Autocomplete search-box" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./styles/autocomplete.css" />
+  </head>
+
+  <body>
+    <main class="search__container">
+      <section class="search__box">
+        <div class="search__input-container">
+          <input
+            type="text"
+            class="search__input"
+            maxlength="30"
+            placeholder="Type something to search"
+          />
+
+          <button class="search__button search-icon">
+            <img
+              class="search__icon"
+              src="./icons/search-2.svg"
+              alt="search-icon"
+            />
+          </button>
+
+          <button class="search__button clear-icon hide">
+            <img
+              class="search__icon search__icon--pointer"
+              src="./icons/delete.svg"
+              alt="search-icon"
+            />
+          </button>
+
+          <button class="search__button spinner-icon hide">
+            <div class="spinner"></div>
+          </button>
+        </div>
+
+        <div class="suggestion__list-container hide"></div>
+
+        <div class="history__list-container hide">
+          <div class="search__list-item search__list-item--inline">
+            <span class="search__title">Search History</span>
+            <button class="clear-history">clear search history</button>
+          </div>
+          <ul class="search__list history-list"></ul>
+        </div>
+      </section>
+    </main>
+
+    <script src="./autocomplete.js" async defer></script>
+  </body>
+</html>

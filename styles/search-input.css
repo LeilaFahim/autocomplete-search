@@ -1,0 +1,40 @@
+.search__input-container {
+  position: relative;
+  height: 40px;
+}
+
+.search__input {
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  border: none;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* .search__input-container:after {
+  content: "";
+  width: 100%;
+  border-bottom: solid 1px var(--border-color);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+} */
+
+.search__button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.search__icon {
+  width: 25px;
+  position: relative;
+  top: 5px;
+  right: 0;
+}
+
+.search__icon--pointer {
+  cursor: pointer;
+}

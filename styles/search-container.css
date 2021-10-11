@@ -1,0 +1,23 @@
+.search__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  top: 10vh;
+}
+
+.search__box {
+  background-color: var(--white-color);
+  border-radius: var(--border-radius);
+  min-height: 40px;
+  width: 40vw;
+  padding: 10px 20px;
+  margin-bottom: 10vh;
+}
+
+@media only screen and (max-width: 992px) {
+  .search__box {
+    width: 75vw;
+    padding: 10px 15px;
+  }
+}

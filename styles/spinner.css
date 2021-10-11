@@ -1,0 +1,20 @@
+.spinner {
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--scroll-color);
+    border-radius: 50%;
+    border-top-color: var(--white-color);
+    animation: spin 1s linear infinite;
+    -webkit-animation: spin 1s linear infinite;
+    background-color: var(--white-color);
+  }
+  
+  @keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
+  @-webkit-keyframes spin {
+    to { -webkit-transform: rotate(360deg); }
+  }
