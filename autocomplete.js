@@ -8,6 +8,7 @@ const suggestionListContainer = document.querySelector(
 const historyListContainer = document.querySelector(".history__list-container");
 let historyArray = [];
 let timeOut = null;
+let previousInputValue = "";
 
 const createHistoryList = (selectedItem) => {
   let IsRepetitive = false;
@@ -106,7 +107,7 @@ const showSearchIcon = () => {
   searchIcon.classList.remove("hide");
 };
 
-const onInputChange = (event) => {
+const onInputChange = () => {
   const inputValue = searchInput.value.trim();
 
   if (inputValue) {
@@ -115,14 +116,12 @@ const onInputChange = (event) => {
 
     clearTimeout(timeOut);
 
-    if (
-      (event.keyCode > 48 && event.keyCode < 90) ||
-      (event.keyCode > 96 && event.keyCode < 105) ||
-      event.keyCode === 8
-    )
+    if (inputValue !== previousInputValue) {
       timeOut = setTimeout(() => fetchData(inputValue), 500);
+      previousInputValue = inputValue;
+    }
   } else {
-    showSearchIcon();
+    onClearClick();
   }
 };
 
@@ -132,7 +131,7 @@ const onClearClick = () => {
   removeSuggestionList();
 };
 
-searchInput.addEventListener("keyup", (event) => onInputChange(event));
+searchInput.addEventListener("keyup", onInputChange);
 
 clearIcon.addEventListener("click", onClearClick);
 
