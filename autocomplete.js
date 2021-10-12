@@ -8,11 +8,12 @@ const suggestionListContainer = document.querySelector(
 const historyListContainer = document.querySelector(".history__list-container");
 let historyArray = [];
 let timeOut = null;
-let previousInputValue = "";
+let inputValue = null;
+let previousInputValue = null;
 
 const createHistoryList = (selectedItem) => {
   let IsRepetitive = false;
-
+  previousInputValue = selectedItem;
   searchInput.value = selectedItem;
 
   historyListContainer.classList.remove("hide");
@@ -89,17 +90,21 @@ const removeSuggestionList = () => {
 };
 
 const fetchData = (value) => {
-  const spinner = document.querySelector(".spinner-icon");
-  spinner.classList.remove("hide");
+  if (inputValue) {
+    const spinner = document.querySelector(".spinner-icon");
+    spinner.classList.remove("hide");
 
-  fetch(`https://gorest.co.in/public/v1/users?name=${value}`)
-    .then((response) => response.json())
-    .then(({ data }) => {
-      spinner.classList.add("hide");
-      removeSuggestionList();
-      createSuggestionList(data);
-    })
-    .catch((error) => console.warn(error));
+    fetch(`https://gorest.co.in/public/v1/users?name=${value}`)
+      .then((response) => response.json())
+      .then(({ data }) => {
+        spinner.classList.add("hide");
+        removeSuggestionList();
+        if (inputValue) createSuggestionList(data);
+        previousInputValue = value;
+        localStorage.setItem("data", JSON.stringify(data));
+      })
+      .catch((error) => console.warn(error));
+  }
 };
 
 const showSearchIcon = () => {
@@ -108,7 +113,7 @@ const showSearchIcon = () => {
 };
 
 const onInputChange = () => {
-  const inputValue = searchInput.value.trim();
+  inputValue = searchInput.value.trim();
 
   if (inputValue) {
     clearIcon.classList.remove("hide");
@@ -118,14 +123,18 @@ const onInputChange = () => {
 
     if (inputValue !== previousInputValue) {
       timeOut = setTimeout(() => fetchData(inputValue), 500);
-      previousInputValue = inputValue;
+    } else {
+      if (!document.querySelector(".suggestion-list")) {
+        const storedData = localStorage.getItem("data");
+        createSuggestionList(JSON.parse(storedData));
+      }
     }
   } else {
-    onClearClick();
+    onClearSearch();
   }
 };
 
-const onClearClick = () => {
+const onClearSearch = () => {
   searchInput.value = "";
   showSearchIcon();
   removeSuggestionList();
@@ -133,7 +142,7 @@ const onClearClick = () => {
 
 searchInput.addEventListener("keyup", onInputChange);
 
-clearIcon.addEventListener("click", onClearClick);
+clearIcon.addEventListener("click", onClearSearch);
 
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("suggestion-title")) {
